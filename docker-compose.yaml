@@ -1,0 +1,37 @@
+version: "3.7"
+services:
+    redis:
+        image: redis
+        volumes:
+            - ./redis_server/redis.conf:/usr/local/etc/redis/redis.conf
+        ports:
+            - "6379:6379"
+    master:
+        build:
+            context: ./master
+            dockerfile: Dockerfile
+        image: master_image
+        container_name: master_container
+        restart: always
+        volumes:
+          - "./LocalStorage/master:/app/LocalStorage"
+        environment:
+            - redis_host=redis
+        depends_on:
+          - redis
+        ports:
+          - "10050:10050"
+
+    worker_sentiment:
+        build:
+            context: ./worker_sentiment
+            dockerfile: Dockerfile
+        image: worker_sentiment_image
+        restart: always
+        environment:
+            - task_name=sentiment
+            - redis_host=redis
+        volumes:
+            - "./LocalStorage/worker:/app/LocalStorage"
+        depends_on:
+            - redis
