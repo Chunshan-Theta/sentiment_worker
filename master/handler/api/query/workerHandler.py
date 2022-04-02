@@ -12,8 +12,8 @@ class worker_handler(APIHandlerBase):
         ---
         tags:
         - model
-        summary: List posts
-        description: List all posts in feed
+        summary: quantify sentiment of sentences
+        description: quantify sentiment of sentences. the value between 0 to 1.(negative to positive)
         produces:
         - application/json
         parameters:
