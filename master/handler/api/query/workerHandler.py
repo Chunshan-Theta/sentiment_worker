@@ -13,13 +13,13 @@ class worker_handler(APIHandlerBase):
         tags:
         - model
         summary: quantify sentiment of sentences
-        description: quantify sentiment of sentences. the value between 0 to 1.(negative to positive)
+        description: quantify sentiment of sentences.the value between 0 to 1.(negative to positive).
         produces:
         - application/json
         parameters:
         -   in: body
             name: body
-            description: post data
+            description: "task_label options: sentiment(classical method)"
             required: true
             schema:
                 type: object
